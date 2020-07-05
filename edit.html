@@ -35,7 +35,7 @@
 
         let defaultSettings = {
             t:
-                "<h2>serverlessHTML</h2><p>It makes your <i>Hyper-Text</i> server-less. HTSL.</p><p>You can click on this page and edit it. The link will contain all the data to render this page on your friend's computer. The link <i>is</i> the website. No data is stored on this server. This file is <strong>only</strong> a bootstrap to load whatever data is in the link.</p><h2>Tables</h2><p>Let's look at Apple, Microsoft &amp; Google:</p><figure class=\"table\"><table><thead><tr><th>Title</th><th>Revenue</th><th>Number of employees</th><th>Founders</th></tr></thead><tbody><tr><td>Apple</td><td>US$ 215.639 billion</td><td>1 (Tim)</td><td>Steve Jobs, Steve Wozniak, Ronald Wayne</td></tr><tr><td>Microsoft</td><td>US$ 85.32 billion</td><td>1 (Satya)</td><td>Bill Gates, Paul Allen</td></tr><tr><td>Google</td><td>US$ 74.54 billion</td><td>1 (Sundar)</td><td>Larry Page, Sergey Brin</td></tr><tr><td colspan=\"4\">Total revenue: US$ 375.499 billion</td></tr></tbody></table></figure><p>CSS by <a href=\"https://igoradamenko.github.io/awsm.css/\">Igor Adamenko</a></p>"
+                "DwCwTAfAzgpgTgN3gGxlKAJAKgWQDLAD04EwADhAJIAuABALYCGA1mrQJ4D2ArnLcAEsIGdmXgBaLDAAe1IkNqxEE1OgB0tbAGU8aohXIQAmj1oBjRgDtzyAWea1O16iAFRaZRgHMYtKwBNaGH8BOlCNLBBfW0sHAHcBZGRzJ2pGAWtGJNoXX39GNJzOWjgYS394HNd3Tx9Hay5eWgAzOAEy-wBydzNOejJuangIqNoYh0EIN3kIKt84mAAjKFCYDQA5YvzCt0VqTlLApyrdpSQ4Ed3mxN9d4ChqOCcvCCdkdiIHp8sXv1pFzicahfRhkIpjTiMQJxEAFGDnWjbRi0XYZOZjDLMPSEAwkLCMRaqIgkQx4GDUboQzgOAq0ACCZDIqAANLQcHYnlBOM06AAyRj9ADctAA4oCvKgAFz6UjXLy8XxmZCMdAAXgARGlCTB1aQtag9VEoXq4IaIFhQqgiC4zQAleFlbgwa0gM3rbj0RaVblBfrITjsGBoF1mgBiPHK8CgIetppdMGNwGoAP87BNev8EAZTOdhGomaTmYAqloACS0MAARgArGoAGwAZgAnP9ErYnNaC-mIJXaAAKC30ACUnYzEC0QyQtAAUpxlqyJw7aAB1TgAL0sAhYrNtTiygWXjHYllz3dj6cLEHZZk53Lkea7xbLtAAHLWG2BW0kBB2H2Pe32WgFOwjAjn+l4AEJtqKcJQKyAAKjDcMkdJJGUo7nkmcbdmKnASqej4QCW5YAOwACxqNWZFfu2lgYd2AFaNw5SMHAYFnt2eCsXA7C0IhPgLvAPi8RBbR0eBebYdhgS9MgUCeJYGpkbqWBAlkJQOpYTqSrQxG0A2JG1mRTYtosbY-uJZ6SaQeYpmm1oEgaRBygqpAUAAwloWj-LxwDIiApTNBqIDUNQZBQJKhCEAIXgHFCAplMwnBqF4oQgNwixqD+hCMHEUD0GoZjoIQuqULFfB0vk9CJZwRCMDZFBAA"
         }
 
         Spruce.store('settings', {})
@@ -82,16 +82,18 @@
 
 
     <script src="./ckeditor.js"></script>
+    <script src="./lz-string.min.js"></script>
     <script>
         InlineEditor
             .create(document.querySelector('#editor'))
             .then(editor => {
                 setTimeout(() => {
-                    editor.setData($store.settings.t)
+                    console.log(LZString.compressToEncodedURIComponent('test'))
+                    editor.setData(LZString.decompressFromEncodedURIComponent($store.settings.t) || 'error')
 
                     editor.model.document.on('change:data', () => {
                         // console.log(JSON.stringify(editor.getData()));
-                        $store.settings.t = editor.getData()
+                        $store.settings.t = LZString.compressToEncodedURIComponent(editor.getData())
                     });
                 }, 500);
 
