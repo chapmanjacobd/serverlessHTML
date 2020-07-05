@@ -1,6 +1,6 @@
 ### ServerlessHTML
 
-Demo: https://unli.xyz/ServerlessHTML/
+Demo: https://unli.xyz/html/edit.html
 
 This is kind of a silly thing. But Alpine.js basically made it a one-liner so I built it.
 
