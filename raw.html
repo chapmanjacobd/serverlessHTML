@@ -14,11 +14,10 @@
     <div x-data="{}" x-subscribe
         style="display: flex; position: relative; justify-content: space-between; width: 100%; flex-wrap: wrap;">
 
-        <div id="editor" placeholder="Paste your HTML here"
-            style="width: 48%; min-height: 20rem; display: flex; flex-direction: column;"></div>
+        <textarea x-model="$store.settings.t" id="editor" placeholder="Paste your HTML here"
+            style="width: 48%; min-height: 20rem; display: flex; flex-direction: column;"></textarea>
 
-        <!-- <textarea x-model="$store.settings.html"></textarea> -->
-        <!-- <div x-html="$store.settings.html" style="width:50%; display: flex; flex-direction: column;"></div> -->
+        <div x-html="$store.settings.t" style="width:50%; display: flex; flex-direction: column;"></div>
 
     </div>
 
@@ -37,7 +36,7 @@
         }
 
         let defaultSettings = {
-            html: ''
+            t: ''
         }
 
         Spruce.store('settings', {})
@@ -82,28 +81,6 @@
 
     </script>
 
-
-    <script src="./ckeditor.js"></script>
-    <script>
-        InlineEditor
-            .create(document.querySelector('#editor'))
-            .then(editor => {
-                setTimeout(() => {
-                    editor.setData($store.settings.html)
-
-                    editor.model.document.on('change:data', () => {
-                        console.log('The data has changed!');
-                        $store.settings.html = editor.getData()
-                    });
-                }, 500);
-
-            })
-            .catch(error => {
-                console.error('There was a problem initializing the editor.', error);
-            });
-
-
-    </script>
 
 
 </body>
