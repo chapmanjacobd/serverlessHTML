@@ -1,6 +1,6 @@
 ### ServerlessHTML
 
-Demo: https://unli.xyz/ServerlessHTML/
+Demo: https://unli.xyz/html/edit.html
 
 https://unli.xyz/html/raw.html?t=%22hello%20world%22
 
