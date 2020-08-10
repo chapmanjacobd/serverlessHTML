@@ -15,7 +15,7 @@
         style="display: flex; position: relative; justify-content: space-between; width: 100%; flex-wrap: wrap;">
 
         <textarea x-model="$store.settings.t" id="editor" placeholder="Paste your HTML here"
-            style="width: 48%; min-height: 20rem; display: flex; flex-direction: column;"></textarea>
+            style="width: 48%; min-height: 40rem; display: flex; flex-direction: column; white-space: pre; overflow-wrap: normal; overflow-x: scroll;"></textarea>
 
         <div x-html="$store.settings.t" style="width:50%; display: flex; flex-direction: column;"></div>
 
@@ -36,8 +36,20 @@
         }
 
         let defaultSettings = {
-            t: ''
-        }
+            t: `<div x-data="{ tab: 'foo' }">
+    <button :class="{ 'active': tab === 'foo' }" @click="tab = 'foo'">Tab 1</button>
+    <button :class="{ 'active': tab === 'bar' }" @click="tab = 'bar'">Tab 2</button>
+
+    <div x-show="tab === 'foo'">Hello</div>
+    <div x-show="tab === 'bar'">World</div>
+</div>
+
+<style> 
+    .active {
+        font-weight: 600;
+        text-decoration: underline;
+    }
+</style>` }
 
         Spruce.store('settings', {})
 
